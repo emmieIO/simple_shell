@@ -8,58 +8,58 @@
  */
 int main(int argc, char *argv[], char *env[])
 {
-	data_of_program data_struct = {NULL}, *data = &data_struct;
+	shell_data data_struct = {NULL}, *data = &data_struct;
 	char *prompt = "";
 
-	inicialize_data(data, argc, argv, env);
+	init_data(data, argc, argv, env);
 
-	signal(SIGINT, handle_ctrl_c);
+	signal(SIGINT, _ctrl_c);
 
 	if (isatty(STDIN_FILENO) && isatty(STDOUT_FILENO) && argc == 1)
-	{/* We are in the terminal, interactive mode */
-		errno = 2;/*???????*/
+	{
+		errno = 2;
 		prompt = PROMPT_MSG;
 	}
 	errno = 0;
-	sisifo(prompt, data);
+	itrator(prompt, data);
 	return (0);
 }
 
 /**
- * handle_ctrl_c - print the prompt in a new line
+ * _ctrl_c - print the prompt in a new line
  * when the signal SIGINT (ctrl + c) is send to the program
  * @UNUSED: option of the prototype
  */
-void handle_ctrl_c(int opr UNUSED)
+void _ctrl_c(int opr UNUSED)
 {
 	_print("\n");
 	_print(PROMPT_MSG);
 }
 
 /**
- * inicialize_data - inicialize the struct with the info of the program
+ * init_data - initialize the struct with the info of the program
  * @data: pointer to the structure of data
  * @argv: array of arguments pased to the program execution
  * @env: environ pased to the program execution
  * @argc: number of values received from the command line
  */
-void inicialize_data(data_of_program *data, int argc, char *argv[], char **env)
+void init_data(shell_data *data, int argc, char *argv[], char **env)
 {
-	int i = 0;
+	int counter = 0;
 
-	data->program_name = argv[0];
-	data->input_line = NULL;
-	data->command_name = NULL;
-	data->exec_counter = 0;
-	/* define the file descriptor to be readed*/
+	data->myprogram = argv[0];
+	data->lineptr = NULL;
+	data->cmd_name = NULL;
+	data->execution_count = 0;
+
 	if (argc == 1)
-		data->file_descriptor = STDIN_FILENO;
+		data->fd = STDIN_FILENO;
 	else
 	{
-		data->file_descriptor = open(argv[1], O_RDONLY);
-		if (data->file_descriptor == -1)
+		data->fd = open(argv[1], O_RDONLY);
+		if (data->fd == -1)
 		{
-			_printe(data->program_name);
+			_printe(data->myprogram);
 			_printe(": 0: Can't open ");
 			_printe(argv[1]);
 			_printe("\n");
@@ -70,49 +70,49 @@ void inicialize_data(data_of_program *data, int argc, char *argv[], char **env)
 	data->env = malloc(sizeof(char *) * 50);
 	if (env)
 	{
-		for (; env[i]; i++)
+		for (; env[counter]; counter++)
 		{
-			data->env[i] = str_duplicate(env[i]);
+			data->env[counter] = dup_str(env[counter]);
 		}
 	}
-	data->env[i] = NULL;
+	data->env[counter] = NULL;
 	env = data->env;
 
-	data->alias_list = malloc(sizeof(char *) * 20);
-	for (i = 0; i < 20; i++)
+	data->aliases = malloc(sizeof(char *) * 20);
+	for (counter = 0; counter < 20; counter++)
 	{
-		data->alias_list[i] = NULL;
+		data->aliases[counter] = NULL;
 	}
 }
 /**
- * sisifo - its a infinite loop that shows the prompt
+ * itrator - its a infinite loop that shows the prompt
  * @prompt: prompt to be printed
  * @data: its a infinite loop that shows the prompt
  */
-void sisifo(char *prompt, data_of_program *data)
+void itrator(char *prompt, shell_data *data)
 {
-	int error_code = 0, string_len = 0;
+	int er_c = 0, str_len = 0;
 
-	while (++(data->exec_counter))
+	while (++(data->execution_count))
 	{
 		_print(prompt);
-		error_code = string_len = _getline(data);
+		er_c = str_len = _readInput(data);
 
-		if (error_code == EOF)
+		if (er_c == EOF)
 		{
 			free_all_data(data);
-			exit(errno); /* if EOF is the fisrt Char of string, exit*/
+			exit(errno);
 		}
-		if (string_len >= 1)
+		if (str_len >= 1)
 		{
 			expand_alias(data);
 			expand_variables(data);
 			tokenize(data);
 			if (data->tokens[0])
-			{ /* if a text is given to prompt, execute */
-				error_code = execute(data);
-				if (error_code != 0)
-					_print_error(error_code, data);
+			{
+				er_c = execute(data);
+				if (er_c != 0)
+					_print_error(er_c, data);
 			}
 			free_recurrent_data(data);
 		}

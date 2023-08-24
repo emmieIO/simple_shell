@@ -5,7 +5,7 @@
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int builtin_exit(data_of_program *data)
+int builtin_exit(shell_data *data)
 {
 	int i;
 
@@ -29,7 +29,7 @@ int builtin_exit(data_of_program *data)
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int builtin_cd(data_of_program *data)
+int builtin_cd(shell_data *data)
 {
 	char *dir_home = env_get_key("HOME", data), *dir_old = NULL;
 	char old_dir[128] = {0};
@@ -68,7 +68,7 @@ int builtin_cd(data_of_program *data)
  * @new_dir: path to be set as work directory
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int set_work_directory(data_of_program *data, char *new_dir)
+int set_work_directory(shell_data *data, char *new_dir)
 {
 	char old_dir[128] = {0};
 	int err_code = 0;
@@ -94,44 +94,44 @@ int set_work_directory(data_of_program *data, char *new_dir)
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int builtin_help(data_of_program *data)
+int builtin_help(shell_data *data)
 {
 	int i, length = 0;
-	char *mensajes[6] = {NULL};
+	char *msgs[6] = {NULL};
 
-	mensajes[0] = HELP_MSG;
+	msgs[0] = HELP_MSG;
 
 	/* validate args */
 	if (data->tokens[1] == NULL)
 	{
-		_print(mensajes[0] + 6);
+		_print(msgs[0] + 6);
 		return (1);
 	}
 	if (data->tokens[2] != NULL)
 	{
 		errno = E2BIG;
-		perror(data->command_name);
+		perror(data->cmd_name);
 		return (5);
 	}
-	mensajes[1] = HELP_EXIT_MSG;
-	mensajes[2] = HELP_ENV_MSG;
-	mensajes[3] = HELP_SETENV_MSG;
-	mensajes[4] = HELP_UNSETENV_MSG;
-	mensajes[5] = HELP_CD_MSG;
+	msgs[1] = HELP_EXIT_MSG;
+	msgs[2] = HELP_ENV_MSG;
+	msgs[3] = HELP_SETENV_MSG;
+	msgs[4] = HELP_UNSETENV_MSG;
+	msgs[5] = HELP_CD_MSG;
 
-	for (i = 0; mensajes[i]; i++)
+	for (i = 0; msgs[i]; i++)
 	{
-		/*print the length of string */
+
 		length = str_length(data->tokens[1]);
-		if (str_compare(data->tokens[1], mensajes[i], length))
+		if (str_compare(data->tokens[1], msgs[i], length))
 		{
-			_print(mensajes[i] + length + 1);
+			_print(msgs[i] + length + 1);
 			return (1);
 		}
 	}
 	/*if there is no match, print error and return -1 */
 	errno = EINVAL;
-	perror(data->command_name);
+	perror(data->cmd_name);
 	return (0);
 }
 
@@ -140,7 +140,7 @@ int builtin_help(data_of_program *data)
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int builtin_alias(data_of_program *data)
+int builtin_alias(shell_data *data)
 {
 	int i = 0;
 

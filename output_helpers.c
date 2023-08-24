@@ -28,15 +28,15 @@ int _printe(char *string)
  * Return: the number of bytes writed or .
  * On error, -1 is returned, and errno is set appropriately.
  */
-int _print_error(int errorcode, data_of_program *data)
+int _print_error(int errorcode, shell_data *data)
 {
 	char n_as_string[10] = {'\0'};
 
-	long_to_string((long) data->exec_counter, n_as_string, 10);
+	long_to_string((long) data->execution_count, n_as_string, 10);
 
 	if (errorcode == 2 || errorcode == 3)
 	{
-		_printe(data->program_name);
+		_printe(data->myprogram);
 		_printe(": ");
 		_printe(n_as_string);
 		_printe(": ");
@@ -50,20 +50,20 @@ int _print_error(int errorcode, data_of_program *data)
 	}
 	else if (errorcode == 127)
 	{
-		_printe(data->program_name);
+		_printe(data->myprogram);
 		_printe(": ");
 		_printe(n_as_string);
 		_printe(": ");
-		_printe(data->command_name);
+		_printe(data->cmd_name);
 		_printe(": not found\n");
 	}
 	else if (errorcode == 126)
 	{
-		_printe(data->program_name);
+		_printe(data->myprogram);
 		_printe(": ");
 		_printe(n_as_string);
 		_printe(": ");
-		_printe(data->command_name);
+		_printe(data->cmd_name);
 		_printe(": Permission denied\n");
 	}
 	return (0);

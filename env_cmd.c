@@ -5,7 +5,7 @@
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int builtin_env(data_of_program *data)
+int builtin_env(shell_data *data)
 {
 	int i;
 	char cpname[50] = {'\0'};
@@ -21,7 +21,7 @@ int builtin_env(data_of_program *data)
 			if (data->tokens[1][i] == '=')
 			{/* checks if exists a var with the same name and change its value*/
 			/* temporally */
-				var_copy = str_duplicate(env_get_key(cpname, data));
+				var_copy = dup_str(env_get_key(cpname, data));
 				if (var_copy != NULL)
 					env_set_key(cpname, data->tokens[1] + i + 1, data);
 
@@ -42,7 +42,7 @@ int builtin_env(data_of_program *data)
 			cpname[i] = data->tokens[1][i];
 		}
 		errno = 2;
-		perror(data->command_name);
+		perror(data->cmd_name);
 		errno = 127;
 	}
 	return (0);
@@ -53,7 +53,7 @@ int builtin_env(data_of_program *data)
  * @data: struct for the program's data
  * Return: zero if sucess, or other number if its declared in the arguments
  */
-int builtin_set_env(data_of_program *data)
+int builtin_set_env(shell_data *data)
 {
 	/* validate args */
 	if (data->tokens[1] == NULL || data->tokens[2] == NULL)
@@ -61,12 +61,11 @@ int builtin_set_env(data_of_program *data)
 	if (data->tokens[3] != NULL)
 	{
 		errno = E2BIG;
-		perror(data->command_name);
+		perror(data->cmd_name);
 		return (5);
 	}
 
 	env_set_key(data->tokens[1], data->tokens[2], data);
-
 	return (0);
 }
 
@@ -75,7 +74,7 @@ int builtin_set_env(data_of_program *data)
  * @data: struct for the program's data'
  * Return: ..
  */
-int builtin_unset_env(data_of_program *data)
+int builtin_unset_env(shell_data *data)
 {
 	/* validate args */
 	if (data->tokens[1] == NULL)
@@ -83,7 +82,7 @@ int builtin_unset_env(data_of_program *data)
 	if (data->tokens[2] != NULL)
 	{
 		errno = E2BIG;
-		perror(data->command_name);
+		perror(data->cmd_name);
 		return (5);
 	}
 	env_remove_key(data->tokens[1], data);

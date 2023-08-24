@@ -6,7 +6,7 @@
  * @data: struct of the program's data
  * Return: a pointer to the value of the variable or NULL if it doesn't exist
  */
-char *env_get_key(char *key, data_of_program *data)
+char *env_get_key(char *key, shell_data *data)
 {
 	int i, key_length = 0;
 
@@ -38,7 +38,7 @@ char *env_get_key(char *key, data_of_program *data)
  * Return: 1 if the parameters are NULL, 2 if there is an erroror 0 if sucess.
  */
 
-int env_set_key(char *key, char *value, data_of_program *data)
+int env_set_key(char *key, char *value, shell_data *data)
 {
 	int i, key_length = 0, is_new_key = 1;
 
@@ -61,7 +61,7 @@ int env_set_key(char *key, char *value, data_of_program *data)
 		}
 	}
 	/* make an string of the form key=value */
-	data->env[i] = str_concat(str_duplicate(key), "=");
+	data->env[i] = str_concat(dup_str(key), "=");
 	data->env[i] = str_concat(data->env[i], value);
 
 	if (is_new_key)
@@ -78,7 +78,7 @@ int env_set_key(char *key, char *value, data_of_program *data)
  * @data: the sructure of the program's data
  * Return: 1 if the key was removed, 0 if the key does not exist;
  */
-int env_remove_key(char *key, data_of_program *data)
+int env_remove_key(char *key, shell_data *data)
 {
 	int i, key_length = 0;
 
@@ -116,7 +116,7 @@ int env_remove_key(char *key, data_of_program *data)
  * @data: struct for the program's data
  * Return: nothing
  */
-void print_environ(data_of_program *data)
+void print_environ(shell_data *data)
 {
 	int j;
 

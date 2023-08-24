@@ -5,17 +5,17 @@
  * @data: struct of the program's data
  * Return: Nothing
  */
-void free_recurrent_data(data_of_program *data)
+void free_recurrent_data(shell_data *data)
 {
 	if (data->tokens)
 		free_array_of_pointers(data->tokens);
-	if (data->input_line)
-		free(data->input_line);
-	if (data->command_name)
-		free(data->command_name);
+	if (data->lineptr)
+		free(data->lineptr);
+	if (data->cmd_name)
+		free(data->cmd_name);
 
-	data->input_line = NULL;
-	data->command_name = NULL;
+	data->lineptr = NULL;
+	data->cmd_name = NULL;
 	data->tokens = NULL;
 }
 
@@ -24,16 +24,16 @@ void free_recurrent_data(data_of_program *data)
  * @data: struct of the program's data
  * Return: Nothing
  */
-void free_all_data(data_of_program *data)
+void free_all_data(shell_data *data)
 {
-	if (data->file_descriptor != 0)
+	if (data->fd != 0)
 	{
-		if (close(data->file_descriptor))
-			perror(data->program_name);
+		if (close(data->fd))
+			perror(data->myprogram);
 	}
 	free_recurrent_data(data);
 	free_array_of_pointers(data->env);
-	free_array_of_pointers(data->alias_list);
+	free_array_of_pointers(data->aliases);
 }
 
 /**

@@ -19,11 +19,11 @@ int str_length(char *string)
 }
 
 /**
- * str_duplicate - duplicates an string
+ * dup_str - duplicates an string
  * @string: String to be copied
  * Return: pointer to the array
  */
-char *str_duplicate(char *string)
+char *dup_str(char *string)
 {
 	char *result;
 	int length, i;

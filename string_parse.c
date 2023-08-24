@@ -4,23 +4,23 @@
  * @data: a pointer to the program's data
  * Return: an array of the different parts of the string
  */
-void tokenize(data_of_program *data)
+void tokenize(shell_data *data)
 {
-	char *delimiter = " \t";
+	char *split = " \t";
 	int i, j, counter = 2, length;
 
-	length = str_length(data->input_line);
+	length = str_length(data->lineptr);
 	if (length)
 	{
-		if (data->input_line[length - 1] == '\n')
-			data->input_line[length - 1] = '\0';
+		if (data->lineptr[length - 1] == '\n')
+			data->lineptr[length - 1] = '\0';
 	}
 
-	for (i = 0; data->input_line[i]; i++)
+	for (i = 0; data->lineptr[i]; i++)
 	{
-		for (j = 0; delimiter[j]; j++)
+		for (j = 0; split[j]; j++)
 		{
-			if (data->input_line[i] == delimiter[j])
+			if (data->lineptr[i] == split[j])
 				counter++;
 		}
 	}
@@ -28,14 +28,14 @@ void tokenize(data_of_program *data)
 	data->tokens = malloc(counter * sizeof(char *));
 	if (data->tokens == NULL)
 	{
-		perror(data->program_name);
+		perror(data->myprogram);
 		exit(errno);
 	}
 	i = 0;
-	data->tokens[i] = str_duplicate(_strtok(data->input_line, delimiter));
-	data->command_name = str_duplicate(data->tokens[0]);
+	data->tokens[i] = dup_str(_strtok(data->lineptr, split));
+	data->cmd_name = dup_str(data->tokens[0]);
 	while (data->tokens[i++])
 	{
-		data->tokens[i] = str_duplicate(_strtok(NULL, delimiter));
+		data->tokens[i] = dup_str(_strtok(NULL, split));
 	}
 }
