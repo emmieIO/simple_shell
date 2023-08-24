@@ -1,7 +1,5 @@
 ## Collaborators/Authors
 
-        * [ONUOHA NNAEMEKA MARK]
-        * [OKOSE VIVIAN CHIAMAKA]
 [Vivian](https://github.com/vivianokose) and [MARK](https://github.com/emmieIO)_
 
 ## About Project
@@ -34,4 +32,4 @@ The following are some key tasks involved in the ALX Simple Shell project:
 
 ## Conclusion
 
-The ALX Simple Shell project involves the development of a basic shell that provides a command-line interface for users to interact with the operating system. The project tasks include implementing command execution, shell built-in commands, input/output redirection, pipeline support, background processes, and signal handling. By completing these tasks, the project aims to create a functional and efficient shell program.
+The ALX Simple Shell project involves the development of a basic shell that provides a command-line interface for users to interact with the operating system. The project tasks include implementing command execution, shell built-in commands, input/output redirection, pipeline support, background processes, and signal handling. By completing these tasks, the project aims to create a functional and efficient shell program..
