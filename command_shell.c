@@ -1,11 +1,13 @@
 #include "shell.h"
+
 /**
- * main - initialize the variables of the program
- * @argc: number of values received from the command line
- * @argv: values received from the command line
- * @env: number of values received from the command line
- * Return: zero on succes.
+ * main - Initializes program variables.
+ * @argc: Number of command-line arguments.
+ * @argv: Array of command-line argument values.
+ * @env: Array of environment variables.
+ * Return: 0 on success.
  */
+
 int main(int argc, char *argv[], char *env[])
 {
 	shell_data data_struct = {NULL}, *data = &data_struct;
@@ -26,10 +28,11 @@ int main(int argc, char *argv[], char *env[])
 }
 
 /**
- * _ctrl_c - print the prompt in a new line
- * when the signal SIGINT (ctrl + c) is send to the program
- * @UNUSED: option of the prototype
+ * _ctrl_c - Prints the prompt on a new line when the program
+ * receives the SIGINT (ctrl + c) signal.
+ * @UNUSED: Option of the prototype (not used in the function).
  */
+
 void _ctrl_c(int opr UNUSED)
 {
 	_print("\n");
@@ -37,12 +40,13 @@ void _ctrl_c(int opr UNUSED)
 }
 
 /**
- * init_data - initialize the struct with the info of the program
- * @data: pointer to the structure of data
- * @argv: array of arguments pased to the program execution
- * @env: environ pased to the program execution
- * @argc: number of values received from the command line
+ * init_data - Initializes a data structure with program information.
+ * @data: Pointer to the data structure.
+ * @argv: Array of arguments passed during program execution.
+ * @env: Environment variables passed to the program.
+ * @argc: Number of values received from the command line.
  */
+
 void init_data(shell_data *data, int argc, char *argv[], char **env)
 {
 	int counter = 0;
@@ -84,11 +88,13 @@ void init_data(shell_data *data, int argc, char *argv[], char **env)
 		data->aliases[counter] = NULL;
 	}
 }
+
 /**
- * itrator - its a infinite loop that shows the prompt
- * @prompt: prompt to be printed
- * @data: its a infinite loop that shows the prompt
+ * itrator - Enters an infinite loop to display the provided prompt.
+ * @prompt: The prompt to be printed.
+ * @data: The structure containing program data.
  */
+
 void itrator(char *prompt, shell_data *data)
 {
 	int er_c = 0, str_len = 0;

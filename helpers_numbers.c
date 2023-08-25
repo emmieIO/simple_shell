@@ -1,13 +1,14 @@
 #include "shell.h"
 
 /**
- * long_to_string - converts a number to a string.
- * @number: number to be converten in an string.
- * @string: buffer to save the number as string.
- * @base: base to convert number
+ * long_to_string - Converts a number to a string.
+ * @number: The number to be converted into a string.
+ * @string: The buffer to save the number as a string.
+ * @base: The base used for converting the number.
  *
  * Return: Nothing.
  */
+
 void long_to_string(long number, char *string, int base)
 {
 	int index = 0, inNegative = 0;
@@ -35,18 +36,18 @@ void long_to_string(long number, char *string, int base)
 	str_reverse(string);
 }
 
-
 /**
- * _atoi - convert a string to an integer.
+ * _atoi - Converts a string to an integer.
  *
- * @s: pointer to str origen.
- * Return: int of string or 0.
+ * @s: Pointer to the source string.
+ * Return: Integer value of the string, or 0 if invalid.
  */
+
 int _atoi(char *s)
 {
 	int sign = 1;
 	unsigned int number = 0;
-	/*1- analisys sign*/
+
 	while (!('0' <= *s && *s <= '9') && *s != '\0')
 	{
 		if (*s == '-')
@@ -56,7 +57,6 @@ int _atoi(char *s)
 		s++;
 	}
 
-	/*2 - extract the number */
 	while ('0' <= *s && *s <= '9' && *s != '\0')
 	{
 
@@ -67,12 +67,13 @@ int _atoi(char *s)
 }
 
 /**
- * count_characters - count the coincidences of character in string.
+ * count_characters - Counts the occurrences of a character in a string.
  *
- * @string: pointer to str origen.
- * @character: string with  chars to be counted
- * Return: int of string or 0.
+ * @string: Pointer to the source string.
+ * @character: String containing characters to be counted.
+ * Return: Number of occurrences or 0.
  */
+
 int count_characters(char *string, char *character)
 {
 	int i = 0, counter = 0;

@@ -1,11 +1,12 @@
 #include "shell.h"
 
 /**
- * print_alias - add, remove or show aliases
- * @data: struct for the program's data
- * @alias: name of the alias to be printed
- * Return: zero if sucess, or other number if its declared in the arguments
+ * print_alias - Handles adding, removing, or displaying aliases.
+ * @data: A structure containing program-specific data.
+ * @alias: The name of the alias to be printed.
+ * Return: 0 on success, or a different value if specified by arguments.
  */
+
 int print_alias(shell_data *data, char *alias)
 {
 	int i, j, alias_length;
@@ -38,11 +39,12 @@ int print_alias(shell_data *data, char *alias)
 }
 
 /**
- * get_alias - add, remove or show aliases
- * @data: struct for the program's data
- * @name: name of the requested alias.
- * Return: zero if sucess, or other number if its declared in the arguments
+ * get_alias - Handles adding, removing, or displaying aliases.
+ * @data: A structure containing program-specific data.
+ * @name: The name of the requested alias.
+ * Return: 0 on success, or a different value if specified by arguments.
  */
+
 char *get_alias(shell_data *data, char *name)
 {
 	int i, alias_length;
@@ -66,11 +68,12 @@ char *get_alias(shell_data *data, char *name)
 }
 
 /**
- * set_alias - add, or override alias
- * @alias_string: alias to be seted in the form (name='value')
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * set_alias - Adds or overrides an alias.
+ * @alias_string: The alias to be set in the form (name='value').
+ * @data: A structure containing program-specific data.
+ * Return: 0 on success, or a different value if specified by arguments.
  */
+
 int set_alias(char *alias_string, shell_data *data)
 {
 	int i, j;

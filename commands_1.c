@@ -1,10 +1,11 @@
 #include "shell.h"
 
 /**
- * builtin_exit - exit of the program with the status
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_exit - Exits the program with a status code.
+ * @data: A struct containing program data.
+ * Return: Always 0 for success, or a different number if specified.
  */
+
 int builtin_exit(shell_data *data)
 {
 	int i;
@@ -25,10 +26,11 @@ int builtin_exit(shell_data *data)
 }
 
 /**
- * builtin_cd - change the current directory
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_cd - Change the current directory.
+ * @data: A struct containing program data.
+ * Return: Always 0 for success, or a different number if specified.
  */
+
 int builtin_cd(shell_data *data)
 {
 	char *dir_home = env_get_key("HOME", data), *dir_old = NULL;
@@ -63,11 +65,12 @@ int builtin_cd(shell_data *data)
 }
 
 /**
- * set_work_directory - set the work directory
- * @data: struct for the program's data
- * @new_dir: path to be set as work directory
- * Return: zero if sucess, or other number if its declared in the arguments
+ * set_work_directory - Sets the working directory.
+ * @data: A struct containing program data.
+ * @new_dir: Path to be set as the working directory.
+ * Return: Always 0 for success, or a different number if specified.
  */
+
 int set_work_directory(shell_data *data, char *new_dir)
 {
 	char old_dir[128] = {0};
@@ -90,10 +93,11 @@ int set_work_directory(shell_data *data, char *new_dir)
 }
 
 /**
- * builtin_help - shows the environment where the shell runs
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_help - Displays the runtime environment of the shell.
+ * @data: A structure containing program-specific data.
+ * Return: Always 0 upon success, or another value if specified by arguments.
  */
+
 int builtin_help(shell_data *data)
 {
 	int i, length = 0;
@@ -136,10 +140,11 @@ int builtin_help(shell_data *data)
 }
 
 /**
- * builtin_alias - add, remove or show aliases
- * @data: struct for the program's data
- * Return: zero if sucess, or other number if its declared in the arguments
+ * builtin_alias - Manages aliases, allowing addition, removal, and display.
+ * @data: A structure holding program-specific data.
+ * Return: 0 on success, or a different value if specified by arguments.
  */
+
 int builtin_alias(shell_data *data)
 {
 	int i = 0;

@@ -1,10 +1,11 @@
 #include "shell.h"
 
 /**
- * free_recurrent_data - free the fields needed each loop
- * @data: struct of the program's data
- * Return: Nothing
+ * free_recurrent_data - Frees the fields needed for each loop iteration.
+ * @data: A structure containing program-specific data.
+ * Return: Nothing.
  */
+
 void free_recurrent_data(shell_data *data)
 {
 	if (data->tokens)
@@ -20,10 +21,11 @@ void free_recurrent_data(shell_data *data)
 }
 
 /**
- * free_all_data - free all field of the data
- * @data: struct of the program's data
- * Return: Nothing
+ * free_all_data - Frees all fields within the data structure.
+ * @data: A structure containing program-specific data.
+ * Return: Nothing.
  */
+
 void free_all_data(shell_data *data)
 {
 	if (data->fd != 0)
@@ -37,11 +39,12 @@ void free_all_data(shell_data *data)
 }
 
 /**
- * free_array_of_pointers - frees each pointer of an array of pointers and the
- * array too
- * @array: array of pointers
- * Return: nothing
+ * free_array_of_pointers - Frees each pointer in an array
+ * of pointers and the array itself.
+ * @array: Array of pointers.
+ * Return: Nothing.
  */
+
 void free_array_of_pointers(char **array)
 {
 	int i;

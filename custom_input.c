@@ -1,11 +1,12 @@
 #include "shell.h"
 
 /**
-* _readInput - Takes input from the user.
-* @data: struct for the program's data
-*
-* Return: returns size of bytes read.
-*/
+ * _readInput - Retrieves input from the user.
+ * @data: A structure containing program-specific data.
+ *
+ * Return: Returns the number of bytes read.
+ */
+
 int _readInput(shell_data *data)
 {
 	char buff[BUFFER_SIZE] = {'\0'};
@@ -46,23 +47,21 @@ int _readInput(shell_data *data)
 
 
 /**
-* ops_handle - Examines and separates commands
-* based on the && and || operators.
-*
-* This function examines an array of commands
-* and separates them based on the && and || operators.
-* It takes the current command index, along with arrays
-* of commands and logical operators, to determine the
-* execution order.
-*
-* @arr_cmd: An array containing the commands to be processed.
-* @i: The index pointing to the current command in the array.
-* @arr_ops: An array holding the logical operators corresponding
-* to previous commands.
-*
-* Return: The index of the last processed command within
-* the array_commands.
-*/
+ * ops_handle - Analyzes and separates commands based on && and || operators.
+ *
+ * This function examines an array of commands and separates them
+ * based on the logical operators && and ||. It takes the current
+ * command index, along with arrays of commands and logical operators,
+ * to determine the execution order.
+ *
+ * @arr_cmd: An array containing the commands to be processed.
+ * @i: The index pointing to the current command in the array.
+ * @arr_ops: An array holding the logical operators corresponding
+ *           to previous commands.
+ *
+ * Return: The index of the last processed command within
+ *         the array_commands.
+ */
 
 int ops_handle(char *arr_cmd[], int i, char arr_ops[])
 {

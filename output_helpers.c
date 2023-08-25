@@ -1,33 +1,37 @@
 #include "shell.h"
 
 /**
- * _print - writes a array of chars in the standar output
- * @string: pointer to the array of chars
- * Return: the number of bytes writed or .
+ * _print - Writes an array of characters to the standard output.
+ * @string: Pointer to the array of characters.
+ * Return: The number of bytes written.
  * On error, -1 is returned, and errno is set appropriately.
  */
+
 int _print(char *string)
 {
 	return (write(STDOUT_FILENO, string, str_length(string)));
 }
+
 /**
- * _printe - writes a array of chars in the standar error
- * @string: pointer to the array of chars
- * Return: the number of bytes writed or .
- * On error, -1 is returned, and errno is set appropriately.
+ * _printe - Writes an array of characters to the standard error.
+ * @string: Pointer to the array of characters.
+ * Return: The number of bytes written. On error,
+ * -1 is returned, and errno is set appropriately.
  */
+
 int _printe(char *string)
 {
 	return (write(STDERR_FILENO, string, str_length(string)));
 }
 
 /**
- * _print_error - writes a array of chars in the standart error
- * @data: a pointer to the program's data'
- * @errorcode: error code to print
- * Return: the number of bytes writed or .
+ * _print_error - Writes an array of characters to the standard error.
+ * @data: A pointer to the program's data.
+ * @errorcode: Error code to print.
+ * Return: The number of bytes written.
  * On error, -1 is returned, and errno is set appropriately.
  */
+
 int _print_error(int errorcode, shell_data *data)
 {
 	char n_as_string[10] = {'\0'};
